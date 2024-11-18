@@ -254,7 +254,342 @@
             <h2>See It In Action</h2>
             <div class="demo-container">
                 <div class="demo-preview">
-                    <!-- Insert your interactive teaser component here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaser Style Selector</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+
+        .style-selector {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #006838;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .selector-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .style-button {
+            padding: 15px 30px;
+            border: 2px solid #006838;
+            border-radius: 8px;
+            background: white;
+            color: #006838;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .style-button.active {
+            background: #006838;
+            color: white;
+        }
+
+        .style-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 12px;
+            background: #333;
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-bottom: 8px;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        .style-button:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .teaser-preview {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .teaser-preview.active {
+            display: block;
+        }
+
+        .teaser-header {
+            background: #006838;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .header-text h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f1f1f1;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: #006838;
+            border-bottom: 2px solid #006838;
+        }
+
+        .tab-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .simple-content {
+            padding: 20px;
+        }
+
+        .simple-content section {
+            margin-bottom: 20px;
+        }
+
+        .simple-content h4 {
+            color: #006838;
+            margin-bottom: 10px;
+        }
+
+        .apply-button {
+            display: block;
+            background: #006838;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .apply-button:hover {
+            background: #005730;
+        }
+    </style>
+</head>
+<body>
+    <div class="style-selector">
+        <h2>Choose Your Teaser Style</h2>
+        
+        <div class="selector-buttons">
+            <button class="style-button active" onclick="switchStyle('interactive')">
+                <span>🔄</span> Interactive Tabs
+                <div class="tooltip">Organized content in clickable tabs</div>
+            </button>
+            <button class="style-button" onclick="switchStyle('simple')">
+                <span>📜</span> Simple Scroll
+                <div class="tooltip">All content in one scroll</div>
+            </button>
+        </div>
+
+        <div class="preview-container">
+            <!-- Interactive Teaser -->
+            <div id="interactivePreview" class="teaser-preview active">
+                <div class="teaser-header">
+                    <div class="logo-circle">
+                        <img src="https://via.placeholder.com/60" alt="Company Logo">
+                    </div>
+                    <div class="header-text">
+                        <h3>Senior Developer</h3>
+                        <p>Tech Solutions Inc.</p>
+                    </div>
+                </div>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab(event, 'about')">About</button>
+                    <button class="tab" onclick="switchTab(event, 'requirements')">Requirements</button>
+                    <button class="tab" onclick="switchTab(event, 'benefits')">Benefits</button>
+                </div>
+                
+                <div id="about" class="tab-content active">
+                    <p>Join our dynamic team of developers working on cutting-edge projects...</p>
+                </div>
+                <div id="requirements" class="tab-content">
+                    <p>• 5+ years experience in web development<br>
+                       • Strong JavaScript skills<br>
+                       • Team player with good communication</p>
+                </div>
+                <div id="benefits" class="tab-content">
+                    <p>• Competitive salary<br>
+                       • Remote work options<br>
+                       • Health insurance</p>
+                </div>
+                
+                <a href="#" class="apply-button">Apply Now</a>
+            </div>
+
+            <!-- Simple Teaser -->
+            <div id="simplePreview" class="teaser-preview">
+                <div class="teaser-header">
+                    <div class="logo-circle">
+                        <img src="https://via.placeholder.com/60" alt="Company Logo">
+                    </div>
+                    <div class="header-text">
+                        <h3>Senior Developer</h3>
+                        <p>Tech Solutions Inc.</p>
+                    </div>
+                </div>
+                
+                <div class="simple-content">
+                    <section>
+                        <h4>About</h4>
+                        <p>Join our dynamic team of developers working on cutting-edge projects...</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Requirements</h4>
+                        <p>• 5+ years experience in web development<br>
+                           • Strong JavaScript skills<br>
+                           • Team player with good communication</p>
+                    </section>
+                    
+                    <section>
+                        <h4>Benefits</h4>
+                        <p>• Competitive salary<br>
+                           • Remote work options<br>
+                           • Health insurance</p>
+                    </section>
+                </div>
+                
+                <a href="#" class="apply-button">Apply Now</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchStyle(style) {
+            document.querySelectorAll('.style-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            document.querySelectorAll('.teaser-preview').forEach(preview => {
+                preview.classList.remove('active');
+            });
+            
+            if (style === 'interactive') {
+                document.getElementById('interactivePreview').classList.add('active');
+            } else {
+                document.getElementById('simplePreview').classList.add('active');
+            }
+        }
+
+        function switchTab(event, tabName) {
+            const tabContainer = event.currentTarget.closest('.teaser-preview');
+            
+            tabContainer.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            tabContainer.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            tabContainer.querySelector(`#${tabName}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
+Let me know when you've done this and I'll help if you need any adjustments!​​​​​​​​​​​​​​​​
                     [Interactive Demo Would Go Here]
                 </div>
             </div>
